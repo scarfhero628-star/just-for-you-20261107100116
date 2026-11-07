@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f1e8">
+  <meta name="description" content="한 사람에게 전하는 따뜻한 응원 한마디.">
+  <meta name="referrer" content="no-referrer">
+  <title>오직 너에게</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #f7f1e8; color: #57493e; font-family: 'Malgun Gothic', system-ui, sans-serif; }
+    button, input, textarea { font: inherit; }
+    button { cursor: pointer; }
+    header { width: min(1040px, 100%); margin: auto; padding: 28px; display: flex; align-items: center; justify-content: space-between; }
+    .brand { font-size: 13px; letter-spacing: .08em; }
+    .edit-button { background: transparent; border: 1px solid #cbbdaf; padding: 10px 14px; border-radius: 24px; color: #665548; font-size: 12px; }
+    main { min-height: calc(100svh - 154px); display: grid; place-items: center; padding: 34px 22px 70px; }
+    .card { width: min(780px, 100%); text-align: center; padding: 58px 40px 52px; background: #fffcf6; border: 1px solid #e7dcd0; border-radius: 180px 180px 20px 20px; box-shadow: 0 18px 60px #8d70520b; }
+    .flower { color: #b98767; font-family: Georgia, serif; font-size: 54px; line-height: 1; margin-bottom: 24px; }
+    .eyebrow { margin: 0 0 24px; color: #987d65; font-size: 11px; letter-spacing: .16em; }
+    h1 { margin: 0; color: #5e705b; font-size: clamp(48px, 9vw, 86px); font-weight: 500; line-height: 1.3; letter-spacing: -.055em; overflow-wrap: anywhere; }
+    .to-you { margin: 13px 0 30px; font-size: 13px; color: #8a7968; }
+    .divider { width: 34px; height: 1px; background: #cdb295; margin: 0 auto 30px; }
+    .message { max-width: 590px; margin: 0 auto; font-size: clamp(21px, 3.6vw, 30px); line-height: 1.85; letter-spacing: -.035em; word-break: keep-all; overflow-wrap: anywhere; white-space: pre-wrap; }
+    .signature { margin: 40px 0 0; font-size: 12px; color: #967c66; }
+    footer { text-align: center; font-size: 11px; color: #8c7a69; padding: 0 20px 28px; }
+    dialog { width: min(520px, calc(100% - 28px)); max-height: calc(100dvh - 32px); border: 1px solid #e2d4c5; padding: 28px; border-radius: 20px; background: #fffcf6; color: #57493e; }
+    dialog::backdrop { background: #40372980; }
+    .editor-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    h2 { font-size: 22px; font-weight: 500; margin: 0; }
+    .close { border: 0; background: transparent; color: #736353; padding: 8px; font-size: 14px; }
+    .hint { color: #87715f; font-size: 12px; line-height: 1.9; margin: 12px 0 22px; }
+    label { display: block; margin: 18px 0 9px; font-size: 13px; }
+    input, textarea { width: 100%; background: #fffefb; color: #57493e; border: 1px solid #cdbfae; border-radius: 10px; padding: 13px; font-size: 16px; line-height: 1.7; }
+    textarea { resize: vertical; min-height: 142px; }
+    .actions { display: flex; gap: 10px; margin-top: 22px; flex-wrap: wrap; }
+    .primary, .secondary { border: 1px solid #6f8269; border-radius: 10px; padding: 12px 16px; font-size: 13px; }
+    .primary { background: #6f8269; color: #fff; flex: 1; }
+    .secondary { background: transparent; color: #526a4c; }
+    .status { min-height: 24px; font-size: 12px; line-height: 1.8; color: #627657; margin-bottom: 0; }
+    .link-box { margin-top: 14px; }
+    .link-box[hidden] { display: none; }
+    .link-box input { font-size: 12px; }
+    :focus-visible { outline: 3px solid #b58a61; outline-offset: 4px; }
+    @media (max-width: 560px) {
+      header { padding: 22px 20px; } main { padding: 24px 16px 45px; }
+      .card { border-radius: 130px 130px 18px 18px; padding: 50px 25px 42px; }
+      .flower { font-size: 44px; } .message { font-size: 23px; } dialog { padding: 22px; }
+    }
+  </style>
+</head>
+<body>
+  <header><span class="brand">오직 너에게</span><button class="edit-button" id="edit" type="button">이름 · 문구 바꾸기</button></header>
+  <main>
+    <article class="card" aria-labelledby="friend-name">
+      <div class="flower" aria-hidden="true">✻</div>
+      <p class="eyebrow">A LITTLE NOTE, JUST FOR YOU</p>
+      <h1 id="friend-name">소중한 너</h1>
+      <p class="to-you">에게 전하고 싶은 말</p>
+      <div class="divider" aria-hidden="true"></div>
+      <p class="message" id="encouragement">오늘도 네 속도로 걸어가면 돼.
+나는 언제나 네 편이야.</p>
+      <p class="signature">너를 생각하는 마음을 담아</p>
+    </article>
+  </main>
+  <footer>한 사람을 떠올리며, 따뜻한 한마디.</footer>
+  <dialog id="editor" aria-labelledby="editor-title">
+    <form id="form">
+      <div class="editor-top"><h2 id="editor-title">그 친구에게 전할 마음</h2><button class="close" id="close" type="button" aria-label="편집 닫기">닫기 ×</button></div>
+      <p class="hint">이름과 문구를 적고 링크를 복사해 보내 주세요.<br>친구가 링크를 열면 지금 적은 마음이 그대로 보여요.</p>
+      <label for="name-input">친구 이름</label><input id="name-input" maxlength="30" required autocomplete="off" placeholder="이름을 적어 주세요">
+      <label for="message-input">응원 한마디</label><textarea id="message-input" maxlength="300" required placeholder="친구에게 건네고 싶은 말"></textarea>
+      <div class="actions"><button class="primary" type="submit">저장하고 미리 보기</button><button class="secondary" id="share" type="button">링크 복사</button></div>
+      <div class="link-box" id="link-box" hidden><label for="share-link">친구에게 보낼 주소</label><input id="share-link" readonly aria-label="복사할 응원 페이지 주소"></div>
+      <p class="status" id="status" role="status" aria-live="polite"></p>
+    </form>
+  </dialog>
+  <script>
+    const defaults = { name: '소중한 너', message: '오늘도 네 속도로 걸어가면 돼.\n나는 언제나 네 편이야.' };
+    const $ = id => document.getElementById(id);
+    function readCard(hash) {
+      const params = new URLSearchParams(hash.replace(/^#/, ''));
+      const name = params.get('name');
+      const message = params.get('message');
+      if (!name || !message || !name.trim() || !message.trim() || name.length > 30 || message.length > 300) return { ...defaults };
+      return { name: name.trim(), message: message.trim() };
+    }
+    function displayCard() {
+      const card = readCard(location.hash);
+      $('friend-name').textContent = card.name;
+      $('encouragement').textContent = card.message;
+      document.title = card.name + '에게 — 오직 너에게';
+      $('name-input').value = card.name;
+      $('message-input').value = card.message;
+    }
+    function saveCard() {
+      if (!$('form').reportValidity()) return false;
+      const name = $('name-input').value.trim();
+      const message = $('message-input').value.trim();
+      if (!name || !message) {
+        $('status').textContent = '이름과 응원 한마디를 채워 주세요.';
+        return false;
+      }
+      const params = new URLSearchParams({ name, message });
+      history.replaceState(null, '', '#' + params.toString());
+      displayCard();
+      return true;
+    }
+    $('edit').addEventListener('click', () => {
+      $('status').textContent = '';
+      $('link-box').hidden = true;
+      displayCard();
+      $('editor').showModal();
+    });
+    $('close').addEventListener('click', () => $('editor').close());
+    $('form').addEventListener('submit', event => {
+      event.preventDefault();
+      if (saveCard()) $('editor').close();
+    });
+    $('share').addEventListener('click', async () => {
+      if (!saveCard()) return;
+      if (location.protocol === 'file:') {
+        $('status').textContent = '인터넷 주소.txt에 있는 페이지를 열어 링크를 만들어 주세요.';
+        return;
+      }
+      $('share-link').value = location.href;
+      $('link-box').hidden = false;
+      try {
+        await navigator.clipboard.writeText(location.href);
+        $('status').textContent = '복사했어요. 이 주소를 친구에게 보내 주세요.';
+      } catch {
+        $('share-link').focus();
+        $('share-link').select();
+        $('status').textContent = '아래 선택된 주소를 복사해 친구에게 보내 주세요.';
+      }
+    });
+    window.addEventListener('hashchange', displayCard);
+    displayCard();
+  </script>
+</body>
+</html>
