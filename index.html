@@ -9,21 +9,21 @@
   <title>오직 너에게</title>
   <style>
     * { box-sizing: border-box; }
-    body { margin: 0; background: #f7f1e8; color: #57493e; font-family: 'Malgun Gothic', system-ui, sans-serif; }
+    body { margin: 0; background: radial-gradient(ellipse at 50% 35%, #fff9ef 0%, #f8eee3 58%, #f1e3d7 100%); color: #654f45; font-family: 'Malgun Gothic', system-ui, sans-serif; }
     button, input, textarea { font: inherit; }
     button { cursor: pointer; }
     header { width: min(1040px, 100%); margin: auto; padding: 28px; display: flex; align-items: center; justify-content: space-between; }
     .brand { font-size: 13px; letter-spacing: .08em; }
     .edit-button { background: transparent; border: 1px solid #cbbdaf; padding: 10px 14px; border-radius: 24px; color: #665548; font-size: 12px; }
-    main { min-height: calc(100svh - 154px); display: grid; place-items: center; padding: 34px 22px 70px; }
-    .card { width: min(780px, 100%); text-align: center; padding: 58px 40px 52px; background: #fffcf6; border: 1px solid #e7dcd0; border-radius: 180px 180px 20px 20px; box-shadow: 0 18px 60px #8d70520b; }
-    .flower { color: #b98767; font-family: Georgia, serif; font-size: 54px; line-height: 1; margin-bottom: 24px; }
-    .eyebrow { margin: 0 0 24px; color: #987d65; font-size: 11px; letter-spacing: .16em; }
-    h1 { margin: 0; color: #5e705b; font-size: clamp(48px, 9vw, 86px); font-weight: 500; line-height: 1.3; letter-spacing: -.055em; overflow-wrap: anywhere; }
-    .to-you { margin: 13px 0 30px; font-size: 13px; color: #8a7968; }
-    .divider { width: 34px; height: 1px; background: #cdb295; margin: 0 auto 30px; }
-    .message { max-width: 590px; margin: 0 auto; font-size: clamp(21px, 3.6vw, 30px); line-height: 1.85; letter-spacing: -.035em; word-break: keep-all; overflow-wrap: anywhere; white-space: pre-wrap; }
-    .signature { margin: 40px 0 0; font-size: 12px; color: #967c66; }
+    main { min-height: calc(100svh - 154px); display: grid; place-items: center; padding: 28px 22px 64px; }
+    .card { width: min(800px, 100%); text-align: center; padding: 48px 48px 44px; background: #fffcf5d9; border: 1px solid #fffdf8; border-radius: 36px; box-shadow: 0 24px 90px #9d765514, inset 0 0 60px #fff9ee; }
+    .flower { color: #bd8c78; font-family: Georgia, serif; font-size: 36px; line-height: 1; margin-bottom: 20px; transform: rotate(-12deg); }
+    .eyebrow { margin: 0 0 26px; color: #97796a; font-size: 12px; letter-spacing: .09em; }
+    h1 { margin: 0; color: #896254; font-family: 'Batang', '바탕', 'Noto Serif CJK KR', serif; font-size: clamp(52px, 10vw, 96px); font-weight: 400; line-height: 1.4; letter-spacing: -.045em; overflow-wrap: anywhere; text-wrap: balance; }
+    .to-you { margin: 10px 0 32px; font-size: 13px; color: #92796b; letter-spacing: .06em; }
+    .divider { width: 28px; height: 1px; background: #d9baa5; margin: 0 auto 32px; }
+    .message { max-width: 580px; margin: 0 auto; padding: 8px 16px; font-family: 'Batang', '바탕', 'Noto Serif CJK KR', serif; font-size: clamp(21px, 3.3vw, 27px); line-height: 2.05; letter-spacing: -.025em; word-break: keep-all; overflow-wrap: anywhere; white-space: pre-wrap; text-wrap: pretty; }
+    .signature { margin: 34px 0 0; font-size: 12px; color: #9a7c6a; letter-spacing: .04em; }
     footer { text-align: center; font-size: 11px; color: #8c7a69; padding: 0 20px 28px; }
     dialog { width: min(520px, calc(100% - 28px)); max-height: calc(100dvh - 32px); border: 1px solid #e2d4c5; padding: 28px; border-radius: 20px; background: #fffcf6; color: #57493e; }
     dialog::backdrop { background: #40372980; }
@@ -45,8 +45,8 @@
     :focus-visible { outline: 3px solid #b58a61; outline-offset: 4px; }
     @media (max-width: 560px) {
       header { padding: 22px 20px; } main { padding: 24px 16px 45px; }
-      .card { border-radius: 130px 130px 18px 18px; padding: 50px 25px 42px; }
-      .flower { font-size: 44px; } .message { font-size: 23px; } dialog { padding: 22px; }
+      .card { border-radius: 28px; padding: 38px 22px 36px; }
+      .flower { font-size: 32px; } .message { font-size: 22px; padding: 4px 0; } dialog { padding: 22px; }
     }
   </style>
 </head>
@@ -54,8 +54,8 @@
   <header><span class="brand">오직 너에게</span><button class="edit-button" id="edit" type="button">이름 · 문구 바꾸기</button></header>
   <main>
     <article class="card" aria-labelledby="friend-name">
-      <div class="flower" aria-hidden="true">✻</div>
-      <p class="eyebrow">A LITTLE NOTE, JUST FOR YOU</p>
+      <div class="flower" aria-hidden="true">✿</div>
+      <p class="eyebrow">너를 떠올리며 쓰는 작은 편지</p>
       <h1 id="friend-name">소중한 너</h1>
       <p class="to-you">에게 전하고 싶은 말</p>
       <div class="divider" aria-hidden="true"></div>
